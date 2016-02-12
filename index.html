@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Ajax</title>
+    </head>
+    <body>
+        <form action="traitement.php" method="post">
+            <select name="list" id="list">
+                <option value="0">Johnny</option>
+                <option value="1">David</option>
+                <option value="2">James</option>
+                <option value="3">Franck</option>
+            </select>
+            <button type="button" id="check" onclick="getId();">Valider</button>
+        </form>
+        <div id="display">
+
+        </div>
+
+        <script type="text/javascript">
+            function getId() {
+                var id = document.getElementById('list').value;
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'traitement.php', true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        document.getElementById("display").innerHTML = xhr.responseText;
+                    }
+                };
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("id="+id);
+            }
+        </script>
+    </body>
+
+</html>
